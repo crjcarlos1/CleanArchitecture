@@ -41,7 +41,7 @@ class InsertNewNote(
             response = cacheResult,
             stateEvent = stateEvent
         ) {
-            override fun handleSuccess(resultObject: Long): DataState<NoteListViewState> {
+            override suspend fun handleSuccess(resultObject: Long): DataState<NoteListViewState>? {
                 return if (resultObject > 0) {
                     val viewState =
                         NoteListViewState(
@@ -73,7 +73,7 @@ class InsertNewNote(
 
         emit(cacheResponse)
 
-        updateNetwork(cacheResponse.stateMessage?.response?.message, newNote)
+        updateNetwork(cacheResponse?.stateMessage?.response?.message, newNote)
     }
 
     private suspend fun updateNetwork(cacheResponse: String?, newNote: Note) {

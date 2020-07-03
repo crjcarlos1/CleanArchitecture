@@ -38,7 +38,7 @@ class SearchNotes(
             response = cacheResult,
             stateEvent = stateEvent
         ) {
-            override fun handleSuccess(resultObject: List<Note>): DataState<NoteListViewState> {
+            override suspend fun handleSuccess(resultObject: List<Note>): DataState<NoteListViewState>? {
 
                 var message: String? = SEARCH_NOTES_SUCCESS
                 var uiComponentType: UIComponentType = UIComponentType.None()

@@ -15,65 +15,69 @@ import kotlinx.coroutines.flow.flow
 class DeleteNote<ViewState>(
     private val noteCacheDataSource: NoteCacheDataSource,
     private val noteNetworkDataSource: NoteNetworkDataSource
-) {
+){
 
     fun deleteNote(
         note: Note,
         stateEvent: StateEvent
     ): Flow<DataState<ViewState>?> = flow {
 
-        val cacheResult = safeCacheCall(Dispatchers.IO) {
+        val cacheResult = safeCacheCall(Dispatchers.IO){
             noteCacheDataSource.deleteNote(note.id)
         }
 
-        val response = object : CacheResponseHandler<ViewState, Int>(
+        val response = object: CacheResponseHandler<ViewState, Int>(
             response = cacheResult,
             stateEvent = stateEvent
-        ) {
-            override fun handleSuccess(resultObject: Int): DataState<ViewState> {
-                return if (resultObject > 0) {
+        ){
+            override suspend fun handleSuccess(resultObj: Int): DataState<ViewState>? {
+                return if(resultObj > 0){
                     DataState.data(
                         response = Response(
                             message = DELETE_NOTE_SUCCESS,
                             uiComponentType = UIComponentType.None(),
                             messageType = MessageType.Success()
-                        ), data = null, stateEvent = stateEvent
+                        ),
+                        data = null,
+                        stateEvent = stateEvent
                     )
-                } else {
+                }
+                else{
                     DataState.data(
                         response = Response(
-                            message = DELETE_NOTE_FAILTURE,
+                            message = DELETE_NOTE_FAILED,
                             uiComponentType = UIComponentType.Toast(),
                             messageType = MessageType.Error()
-                        ), data = null, stateEvent = stateEvent
+                        ),
+                        data = null,
+                        stateEvent = stateEvent
                     )
                 }
             }
         }.getResult()
 
         emit(response)
-        updateNetwork(response?.stateMessage?.response?.message, note)
 
-    }
+        // update network
+        if(response?.stateMessage?.response?.message.equals(DELETE_NOTE_SUCCESS)){
 
-    private suspend fun updateNetwork(message: String?, note: Note) {
-        if (message.equals(DELETE_NOTE_SUCCESS)) {
-            //delete from  'notes' node
-            safeApiCall(Dispatchers.IO) {
+            // delete from 'notes' node
+            safeApiCall(Dispatchers.IO){
                 noteNetworkDataSource.deleteNote(note.id)
             }
 
-            //insert into 'deletes' node
-            safeApiCall(Dispatchers.IO) {
+            // insert into 'deletes' node
+            safeApiCall(Dispatchers.IO){
                 noteNetworkDataSource.insertDeletedNote(note)
             }
-        } else {
+
         }
     }
 
-    companion object {
-        val DELETE_NOTE_SUCCESS = "Successfully delete the note."
-        val DELETE_NOTE_FAILTURE = "Failture to delete note"
+    companion object{
+        val DELETE_NOTE_SUCCESS = "Successfully deleted note."
+        val DELETE_NOTE_PENDING = "Delete pending..."
+        val DELETE_NOTE_FAILED = "Failed to delete note."
+        val DELETE_ARE_YOU_SURE = "Are you sure you want to delete this?"
     }
-
 }
