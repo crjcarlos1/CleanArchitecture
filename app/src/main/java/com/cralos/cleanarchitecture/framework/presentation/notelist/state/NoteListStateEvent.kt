@@ -7,7 +7,10 @@ import com.cralos.cleanarchitecture.business.domain.state.StateMessage
 
 sealed class NoteListStateEvent: StateEvent {
 
-    class InsertNewNoteEvent(val title: String): NoteListStateEvent() {
+    class InsertNewNoteEvent(
+        val title: String,
+        val body: String
+    ): NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error inserting new note."
@@ -21,7 +24,9 @@ sealed class NoteListStateEvent: StateEvent {
     }
 
     // for testing
-    class InsertMultipleNotesEvent(val numNotes: Int): NoteListStateEvent() {
+    class InsertMultipleNotesEvent(
+        val numNotes: Int
+    ): NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error inserting the notes."
@@ -34,7 +39,9 @@ sealed class NoteListStateEvent: StateEvent {
         override fun shouldDisplayProgressBar() = true
     }
 
-    class DeleteNoteEvent(val note: Note): NoteListStateEvent(){
+    class DeleteNoteEvent(
+        val note: Note
+    ): NoteListStateEvent(){
 
         override fun errorInfo(): String {
             return "Error deleting note."
@@ -47,7 +54,9 @@ sealed class NoteListStateEvent: StateEvent {
         override fun shouldDisplayProgressBar() = true
     }
 
-    class DeleteMultipleNotesEvent(val notes: List<Note>): NoteListStateEvent(){
+    class DeleteMultipleNotesEvent(
+        val notes: List<Note>
+    ): NoteListStateEvent(){
 
         override fun errorInfo(): String {
             return "Error deleting the selected notes."
@@ -60,7 +69,9 @@ sealed class NoteListStateEvent: StateEvent {
         override fun shouldDisplayProgressBar() = true
     }
 
-    class RestoreDeletedNoteEvent(val note: Note): NoteListStateEvent() {
+    class RestoreDeletedNoteEvent(
+        val note: Note
+    ): NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error restoring the note that was deleted."
@@ -73,7 +84,9 @@ sealed class NoteListStateEvent: StateEvent {
         override fun shouldDisplayProgressBar() = false
     }
 
-    class SearchNotesEvent(val clearLayoutManagerState: Boolean = true): NoteListStateEvent(){
+    class SearchNotesEvent(
+        val clearLayoutManagerState: Boolean = true
+    ): NoteListStateEvent(){
 
         override fun errorInfo(): String {
             return "Error getting list of notes."
@@ -99,7 +112,9 @@ sealed class NoteListStateEvent: StateEvent {
         override fun shouldDisplayProgressBar() = true
     }
 
-    class CreateStateMessageEvent(val stateMessage: StateMessage): NoteListStateEvent(){
+    class CreateStateMessageEvent(
+        val stateMessage: StateMessage
+    ): NoteListStateEvent(){
 
         override fun errorInfo(): String {
             return "Error creating a new state message."
