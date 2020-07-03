@@ -34,13 +34,13 @@ abstract class CacheResponseHandler<ViewState, Data>(
                         stateEvent = stateEvent
                     )
                 } else {
-                    handleSuccess(responseObject = response.value)
+                    handleSuccess(resultObject = response.value)
                 }
             }
 
         }
     }
 
-    abstract fun handleSuccess(responseObject: Data): DataState<ViewState>
+    abstract fun handleSuccess(resultObject: Data): DataState<ViewState>
 
 }
