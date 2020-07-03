@@ -19,7 +19,7 @@ class DeleteMultipleNotes(
 
     private var onDeleteError: Boolean = false
 
-    private fun deleteNotes(
+    fun deleteNotes(
         notes: List<Note>,
         stateEvent: StateEvent
     ): Flow<DataState<NoteListViewState>?> = flow {
@@ -63,7 +63,7 @@ class DeleteMultipleNotes(
                     data = null, stateEvent = stateEvent
                 )
             )
-        }else{
+        } else {
             emit(
                 DataState.data<NoteListViewState>(
                     response = Response(
@@ -81,13 +81,13 @@ class DeleteMultipleNotes(
     }
 
     private suspend fun updateNetwork(successfulDeletes: ArrayList<Note>) {
-        for (note in successfulDeletes){
+        for (note in successfulDeletes) {
             //delete from 'notes' node
-            safeApiCall(Dispatchers.IO){
+            safeApiCall(Dispatchers.IO) {
                 noteNetworkDataSource.deleteNote(note.id)
             }
             //insert into 'deletes' node
-            safeApiCall(Dispatchers.IO){
+            safeApiCall(Dispatchers.IO) {
                 noteNetworkDataSource.insertDeletedNote(note)
             }
         }

@@ -7,7 +7,7 @@ import com.cralos.cleanarchitecture.business.data.network.abstraction.NoteNetwor
 import com.cralos.cleanarchitecture.business.domain.model.Note
 import com.cralos.cleanarchitecture.business.domain.model.NoteFactory
 import com.cralos.cleanarchitecture.business.domain.state.DataState
-import com.cralos.cleanarchitecture.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_FAILTURE
+import com.cralos.cleanarchitecture.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_FAILED
 import com.cralos.cleanarchitecture.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_SUCCESS
 import com.cralos.cleanarchitecture.di.DependencyContainer
 import com.cralos.cleanarchitecture.framework.presentation.notelist.state.NoteListStateEvent
@@ -102,7 +102,7 @@ class DeleteNoteTest {
             stateEvent = NoteListStateEvent.DeleteNoteEvent(noteToDelete)
         ).collect(object : FlowCollector<DataState<NoteListViewState>?> {
             override suspend fun emit(value: DataState<NoteListViewState>?) {
-                assertEquals(value?.stateMessage?.response?.message, DELETE_NOTE_FAILTURE)
+                assertEquals(value?.stateMessage?.response?.message, DELETE_NOTE_FAILED)
             }
         })
 
