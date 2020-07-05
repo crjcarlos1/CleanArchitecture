@@ -9,7 +9,7 @@ import com.cralos.cleanarchitecture.business.domain.state.DataState
 import com.cralos.cleanarchitecture.business.interactors.notelist.SearchNotes.Companion.SEARCH_NOTES_NO_MATCHING_RESULTS
 import com.cralos.cleanarchitecture.business.interactors.notelist.SearchNotes.Companion.SEARCH_NOTES_SUCCESS
 import com.cralos.cleanarchitecture.di.DependencyContainer
-import com.cralos.cleanarchitecture.framework.datasource.database.ORDER_BY_ASC_DATE_UPDATED
+import com.cralos.cleanarchitecture.framework.datasource.cache.database.ORDER_BY_ASC_DATE_UPDATED
 import com.cralos.cleanarchitecture.framework.presentation.notelist.state.NoteListStateEvent
 import com.cralos.cleanarchitecture.framework.presentation.notelist.state.NoteListViewState
 import kotlinx.coroutines.InternalCoroutinesApi

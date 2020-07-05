@@ -1,7 +1,7 @@
 package com.cralos.cleanarchitecture.framework.datasource.cache.abstraction
 
 import com.cralos.cleanarchitecture.business.domain.model.Note
-import com.cralos.cleanarchitecture.framework.datasource.database.NOTE_PAGINATION_PAGE_SIZE
+import com.cralos.cleanarchitecture.framework.datasource.cache.database.NOTE_PAGINATION_PAGE_SIZE
 
 /**Esta clase es muy parecida a: NoteCacheDataSource*/
 interface NoteDaoService {
