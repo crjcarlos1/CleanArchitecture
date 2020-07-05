@@ -9,7 +9,8 @@ import javax.inject.Singleton
 //esta clase  la proveer'a dagger
 @Singleton
 class NoteCacheDataSourceImpl @Inject constructor(
-    private val noteDaoService: NoteDaoService  /**  'NoteDaoService' -> existe en el paquete framework.datasource  */
+    private val noteDaoService: NoteDaoService
+    /**  'NoteDaoService' -> existe en el paquete framework.datasource  */
 ) : NoteCacheDataSource {
 
 
@@ -33,6 +34,10 @@ class NoteCacheDataSourceImpl @Inject constructor(
         return noteDaoService.updateNote(primaryKey, newTitle, newBody)
     }
 
+    override suspend fun getAllNotes(): List<Note> {
+        return noteDaoService.getAllNotes()
+    }
+
     override suspend fun searchNotes(
         query: String,
         filterAndOrder: String,
@@ -49,7 +54,7 @@ class NoteCacheDataSourceImpl @Inject constructor(
         return noteDaoService.getNumNotes()
     }
 
-    override suspend fun insertNotes(notes: List<Note>): LongArray{
+    override suspend fun insertNotes(notes: List<Note>): LongArray {
         return noteDaoService.insertNotes(notes)
     }
 
