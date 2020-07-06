@@ -9,6 +9,7 @@ import com.cralos.cleanarchitecture.business.data.network.NetworkConstans.NETWOR
 import com.cralos.cleanarchitecture.business.data.network.NetworkErrors.NETWORK_ERROR_TIMEOUT
 import com.cralos.cleanarchitecture.business.data.network.NetworkErrors.NETWORK_ERROR_UNKNOWN
 import com.cralos.cleanarchitecture.business.util.SingletonErrors.ERROR_UNKNOWN
+import com.cralos.cleanarchitecture.util.cLog
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import java.io.IOException
@@ -26,6 +27,7 @@ suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend ()
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
+            cLog(throwable.message)
             when (throwable) {
                 is TimeoutCancellationException -> {
                     val code = 408 // timeout error code
@@ -65,6 +67,7 @@ suspend fun <T> safeCacheCall(
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
+            cLog(throwable.message)
             when (throwable) {
 
                 is TimeoutCancellationException -> {
