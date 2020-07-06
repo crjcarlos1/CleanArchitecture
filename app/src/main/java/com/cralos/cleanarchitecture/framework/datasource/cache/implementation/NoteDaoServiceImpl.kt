@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NoteDaoServiceImplementation
+class NoteDaoServiceImpl
 @Inject constructor(
     private val noteDao: NoteDao,
     private val noteMapper: CacheMapper,

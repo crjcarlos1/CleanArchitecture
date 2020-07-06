@@ -1,6 +1,7 @@
 package com.cralos.cleanarchitecture.framework.datasource.cache.util
 
 import com.cralos.cleanarchitecture.business.domain.model.Note
+import com.cralos.cleanarchitecture.business.domain.util.DateUtil
 import com.cralos.cleanarchitecture.business.domain.util.EntityMapper
 import com.cralos.cleanarchitecture.framework.datasource.cache.model.NoteCacheEntity
 import javax.inject.Inject
@@ -9,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class CacheMapper
 @Inject
-constructor() : EntityMapper<NoteCacheEntity, Note> {
+constructor(var dateUtil: DateUtil) : EntityMapper<NoteCacheEntity, Note> {
 
     fun entityListToNoteList(entities: List<NoteCacheEntity>): List<Note> {
         val list: ArrayList<Note> = ArrayList()
