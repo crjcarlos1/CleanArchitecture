@@ -17,7 +17,7 @@ import com.cralos.cleanarchitecture.business.interactors.notelist.*
 import com.cralos.cleanarchitecture.business.interactors.splash.SyncDeletedNotes
 import com.cralos.cleanarchitecture.business.interactors.splash.SyncNotes
 import com.cralos.cleanarchitecture.framework.datasource.cache.abstraction.NoteDaoService
-import com.cralos.cleanarchitecture.framework.datasource.cache.implementation.NoteDaoServiceImplementation
+import com.cralos.cleanarchitecture.framework.datasource.cache.implementation.NoteDaoServiceImpl
 import com.cralos.cleanarchitecture.framework.datasource.cache.util.CacheMapper
 import com.cralos.cleanarchitecture.framework.datasource.network.abstraction.NoteFirestoreService
 import com.cralos.cleanarchitecture.framework.datasource.network.mappers.NetworkMapper
@@ -110,7 +110,7 @@ object AppModule {
         noteEntityMapper: CacheMapper,
         dateUtil: DateUtil
     ): NoteDaoService{
-        return NoteDaoServiceImplementation(noteDao, noteEntityMapper, dateUtil)
+        return NoteDaoServiceImpl(noteDao, noteEntityMapper, dateUtil)
     }
 
     @JvmStatic
