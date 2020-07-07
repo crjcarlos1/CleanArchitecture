@@ -1,5 +1,6 @@
 package com.cralos.cleanarchitecture.di
 
+import com.cralos.cleanarchitecture.framework.datasource.cache.NoteDaoServiceTests
 import com.cralos.cleanarchitecture.framework.datasource.network.NoteFirestoreServiceTests
 import com.cralos.cleanarchitecture.framework.presentation.TestBaseApplication
 import dagger.BindsInstance
@@ -24,5 +25,7 @@ interface TestAppComponent :AppComponent{
     }
 
     fun inject(noteFirestoreServiceTests: NoteFirestoreServiceTests)
+
+    fun inject(noteDaoServiceTests: NoteDaoServiceTests)
 
 }

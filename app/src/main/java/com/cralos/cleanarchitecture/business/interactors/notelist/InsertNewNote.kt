@@ -28,8 +28,7 @@ class InsertNewNote(
 
         val newNote = noteFactory.createSingleNote(
             id = id ?: UUID.randomUUID().toString(),
-            title = title,
-            body = ""
+            title = title
         )
 
         /**INSERT DE LA NOTA NUEVA*/

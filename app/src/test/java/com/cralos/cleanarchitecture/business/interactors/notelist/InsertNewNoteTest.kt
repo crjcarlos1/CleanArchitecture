@@ -88,8 +88,7 @@ class InsertNewNoteTest {
             id = newNote.id,
             title = newNote.title,
             stateEvent = NoteListStateEvent.InsertNewNoteEvent(
-                title = newNote.title,
-                body = newNote.body
+                title = newNote.title
             )
         ).collect(object : FlowCollector<DataState<NoteListViewState>?> {
             override suspend fun emit(value: DataState<NoteListViewState>?) {
@@ -129,8 +128,7 @@ class InsertNewNoteTest {
             id = newNote.id,
             title = newNote.title,
             stateEvent = NoteListStateEvent.InsertNewNoteEvent(
-                title = newNote.title,
-                body = newNote.body
+                title = newNote.title
             )
         ).collect(object : FlowCollector<DataState<NoteListViewState>?> {
             override suspend fun emit(value: DataState<NoteListViewState>?) {
@@ -169,8 +167,7 @@ class InsertNewNoteTest {
             id = newNote.id,
             title = newNote.title,
             stateEvent = NoteListStateEvent.InsertNewNoteEvent(
-                title = newNote.title,
-                body = newNote.body
+                title = newNote.title
             )
         ).collect(object : FlowCollector<DataState<NoteListViewState>?> {
             override suspend fun emit(value: DataState<NoteListViewState>?) {
