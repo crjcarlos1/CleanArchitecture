@@ -357,12 +357,13 @@ constructor(
     }
 
     private fun navigateToDetailFragment(selectedNote: Note){
+        /*
         val bundle = bundleOf(NOTE_DETAIL_SELECTED_NOTE_BUNDLE_KEY to selectedNote)
         findNavController().navigate(
             R.id.action_note_list_fragment_to_noteDetailFragment,
             bundle
         )
-        viewModel.setNote(null)
+        viewModel.setNote(null)*/
     }
 
     private fun setupUI(){
