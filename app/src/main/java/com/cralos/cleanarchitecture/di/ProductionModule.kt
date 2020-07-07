@@ -1,7 +1,10 @@
 package com.cralos.cleanarchitecture.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.cralos.cleanarchitecture.framework.datasource.cache.database.NoteDataBase
+import com.cralos.cleanarchitecture.framework.preferences.PreferencesKeys
 import com.cralos.cleanarchitecture.framework.presentation.BaseApplication
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -36,6 +39,16 @@ object ProductionModule {
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideSharepreferences(application: BaseApplication): SharedPreferences {
+        return application.getSharedPreferences(
+            PreferencesKeys.NOTE_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
     }
 
 
