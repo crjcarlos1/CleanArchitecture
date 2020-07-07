@@ -9,19 +9,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 class MainActivity : AppCompatActivity() {
     val TAG = "AppDebug"
 
-    @Inject
-    lateinit var firebaseAuth : FirebaseAuth
-
-    @ExperimentalCoroutinesApi
-    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as BaseApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        printLogD("MainActivity","firebaseAuth: $firebaseAuth")
     }
 
 }
