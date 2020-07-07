@@ -30,13 +30,27 @@ class NoteDaoServiceImpl
         }
     }
 
-    override suspend fun updateNote(primaryKey: String, newTitle: String, newBody: String?): Int {
-        return noteDao.updateNote(
-            primaryKey = primaryKey,
-            title = newTitle,
-            body = newBody,
-            updated_at = dateUtil.getCurrentTimestamp()
-        )
+    override suspend fun updateNote(
+        primaryKey: String,
+        newTitle: String,
+        newBody: String?,
+        timestamp: String?
+    ): Int {
+        if (timestamp != null) {
+            return noteDao.updateNote(
+                primaryKey = primaryKey,
+                title = newTitle,
+                body = newBody,
+                updated_at = timestamp
+            )
+        } else {
+            return noteDao.updateNote(
+                primaryKey = primaryKey,
+                title = newTitle,
+                body = newBody,
+                updated_at = dateUtil.getCurrentTimestamp()
+            )
+        }
     }
 
     override suspend fun deleteNote(primaryKey: String): Int {
