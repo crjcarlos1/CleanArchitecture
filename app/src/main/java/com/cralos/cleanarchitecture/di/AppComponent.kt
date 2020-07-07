@@ -2,6 +2,8 @@ package com.cralos.cleanarchitecture.di
 
 import com.cralos.cleanarchitecture.framework.presentation.BaseApplication
 import com.cralos.cleanarchitecture.framework.presentation.MainActivity
+import com.cralos.cleanarchitecture.framework.presentation.notedetail.NoteDetailFragment
+import com.cralos.cleanarchitecture.framework.presentation.notelist.NoteListFragment
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,5 +29,9 @@ interface AppComponent {
     }
 
     fun inject(mainActivity: MainActivity)
+
+    fun inject(noteListFragment: NoteListFragment)
+
+    fun inject(noteDetailFragment: NoteDetailFragment)
 
 }

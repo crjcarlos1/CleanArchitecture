@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.cralos.cleanarchitecture.R
+import com.cralos.cleanarchitecture.framework.presentation.BaseApplication
 import com.cralos.cleanarchitecture.framework.presentation.common.BaseNoteFragment
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class SplashFragment
 constructor(
     private val viewModelFactory: ViewModelProvider.Factory
@@ -19,12 +24,40 @@ constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FirebaseCrashlytics.getInstance().log("THIS IS THE FIRST LOG!")
+        navNoteListFragment()
     }
 
+    private fun navNoteListFragment() {
+        findNavController().navigate(R.id.action_splashFragment_to_noteListFragment)
+    }
 
     override fun inject() {
-        TODO("prepare dagger")
+        activity?.run {
+            (application as BaseApplication).appComponent
+        } ?: throw Exception("AppComponent is null.")
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
