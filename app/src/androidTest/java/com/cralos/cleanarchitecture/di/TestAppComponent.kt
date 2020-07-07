@@ -1,6 +1,6 @@
 package com.cralos.cleanarchitecture.di
 
-import com.cralos.cleanarchitecture.business.TemTest
+import com.cralos.cleanarchitecture.framework.datasource.network.NoteFirestoreServiceTests
 import com.cralos.cleanarchitecture.framework.presentation.TestBaseApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -23,6 +23,6 @@ interface TestAppComponent :AppComponent{
         fun create(@BindsInstance app: TestBaseApplication) : TestAppComponent
     }
 
-    fun inject(tempTest: TemTest)
+    fun inject(noteFirestoreServiceTests: NoteFirestoreServiceTests)
 
 }

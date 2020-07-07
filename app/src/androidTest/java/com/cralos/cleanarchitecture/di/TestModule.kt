@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.cralos.cleanarchitecture.framework.datasource.cache.database.NoteDataBase
 import com.cralos.cleanarchitecture.framework.presentation.TestBaseApplication
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,8 +26,21 @@ object TestModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideFirebaseFirestore() : FirebaseFirestore{
-        return FirebaseFirestore.getInstance()
+    fun providesFirestoreSettings() : FirebaseFirestoreSettings{
+        return FirebaseFirestoreSettings.Builder()
+            .setHost("10.0.2.2:8080")
+            .setSslEnabled(false)
+            .setPersistenceEnabled(false)
+            .build()
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideFirebaseFirestore(settings : FirebaseFirestoreSettings) : FirebaseFirestore{
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.firestoreSettings=settings
+        return firestore
     }
 
 }
