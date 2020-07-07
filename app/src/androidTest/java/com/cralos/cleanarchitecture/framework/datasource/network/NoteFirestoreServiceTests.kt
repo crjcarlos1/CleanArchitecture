@@ -97,8 +97,8 @@ class NoteFirestoreServiceTests : BaseTest() {
     }
 
     companion object {
-        const val EMAIL = "carlos@uam.com"
-        const val PASSWORD = "password"
+        const val EMAIL = "carlos"
+        const val PASSWORD = "123"
     }
 
     override fun injectTest() {
