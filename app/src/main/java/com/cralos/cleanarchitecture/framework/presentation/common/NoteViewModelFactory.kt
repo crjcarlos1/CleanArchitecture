@@ -8,6 +8,7 @@ import com.cralos.cleanarchitecture.business.interactors.notedetail.NoteDetailIn
 import com.cralos.cleanarchitecture.business.interactors.notelist.NoteListInteractors
 import com.cralos.cleanarchitecture.framework.presentation.notedetail.NoteDetailViewModel
 import com.cralos.cleanarchitecture.framework.presentation.notelist.NoteListViewModel
+import com.cralos.cleanarchitecture.framework.presentation.splash.NoteNetworkSyncManager
 import com.cralos.cleanarchitecture.framework.presentation.splash.SplashViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -22,6 +23,7 @@ class NoteViewModelFactory
 constructor(
     private val noteListInteractors: NoteListInteractors,
     private val noteDetailInteractors: NoteDetailInteractors,
+    private val noteNetworkSyncManager: NoteNetworkSyncManager,
     private val noteFactory: NoteFactory,
     private val editor: SharedPreferences.Editor,
     private val sharedPreferences: SharedPreferences
@@ -46,7 +48,7 @@ constructor(
             }
 
             SplashViewModel::class.java -> {
-                SplashViewModel() as T
+                SplashViewModel(noteNetworkSyncManager = noteNetworkSyncManager) as T
             }
 
             else -> {

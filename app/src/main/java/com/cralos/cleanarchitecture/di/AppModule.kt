@@ -21,6 +21,7 @@ import com.cralos.cleanarchitecture.framework.datasource.cache.implementation.No
 import com.cralos.cleanarchitecture.framework.datasource.cache.util.CacheMapper
 import com.cralos.cleanarchitecture.framework.datasource.network.abstraction.NoteFirestoreService
 import com.cralos.cleanarchitecture.framework.datasource.network.mappers.NetworkMapper
+import com.cralos.cleanarchitecture.framework.presentation.splash.NoteNetworkSyncManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -203,6 +204,16 @@ object AppModule {
             RestoreDeletedNote(noteCacheDataSource, noteNetworkDataSource),
             DeleteMultipleNotes(noteCacheDataSource, noteNetworkDataSource)
         )
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideNoteNetworkSyncManager(
+        syncNotes: SyncNotes,
+        syncDeletedNotes: SyncDeletedNotes
+    ):NoteNetworkSyncManager{
+        return NoteNetworkSyncManager(syncNotes,syncDeletedNotes)
     }
 
 
